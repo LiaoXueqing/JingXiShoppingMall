@@ -5,7 +5,6 @@ import com.example.JingXiShoppingMall.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,9 +18,7 @@ public class ProductController {
      * @return
      */
     @PostMapping()
-    public ResponseEntity addProducts(@RequestBody Product product) throws Exception {
-        //name,description,price
-//        Product p = new Product(name,description,price);
+    public ResponseEntity addProduct(@RequestBody Product product) throws Exception {
         productRepository.save(product);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -42,7 +39,8 @@ public class ProductController {
      */
     @GetMapping("/{id}")
     public ResponseEntity getProductById(@PathVariable Long id) throws Exception {
-        return new ResponseEntity(productRepository.getOne(id), HttpStatus.OK);
+        Product p = productRepository.getOne(id);
+        return new ResponseEntity(p, HttpStatus.OK);
     }
     /**
      * 查找所有商品
