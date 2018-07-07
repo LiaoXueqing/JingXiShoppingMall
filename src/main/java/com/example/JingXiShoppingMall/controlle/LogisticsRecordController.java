@@ -18,6 +18,13 @@ public class LogisticsRecordController {
     /**
      * 查看物流信息
      */
+    @GetMapping("")
+    public ResponseEntity getLogisticsRecord() throws Exception{
+        return new ResponseEntity(logisticsRecordRepository.findAll(), HttpStatus.OK);
+    }
+    /**
+     * 查看物流信息
+     */
     @GetMapping("/{id}")
     public ResponseEntity getLogisticsRecordById(@PathVariable Long id) throws Exception{
         return new ResponseEntity(logisticsRecordRepository.getOne(id), HttpStatus.OK);
@@ -26,7 +33,7 @@ public class LogisticsRecordController {
      * 修改快递单：发货，签收
      */
     @PutMapping("/{id}/orders/{oid}?logisticsStatus={status}")
-    public String shippingLogisticsRecord(@PathVariable Long id,@PathVariable Long oid,@PathVariable String status) throws Exception{
+    public ResponseEntity shippingLogisticsRecord(@PathVariable Long id,@PathVariable Long oid,@PathVariable String status) throws Exception{
         //发货shipping
         //签收signed
         return null;

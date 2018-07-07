@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("orders")
 public class OrderItemController {
@@ -24,12 +26,13 @@ public class OrderItemController {
     /**
      * 修改：支付订单、撤销订单
      */
-    @PutMapping("/{id}?orderStatus={status}")
+    @PutMapping("/{id}/orderStatus={status}")
     public ResponseEntity updateOrder(@PathVariable Long id,@PathVariable String status) throws Exception {
         //支付status = paid
         //撤销status = withdrawn
         OrderItem order = orderRepository.getOne(id);
         order.setOrderStatus(status);
+        orderRepository.save(order);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @GetMapping("")
@@ -46,8 +49,11 @@ public class OrderItemController {
     /**
      * 查询：根据用户Id查看订单
      */
-    @GetMapping("?userId={userId}")
+    @GetMapping("/userId={userId}")
     public ResponseEntity getOrderByUserId(@PathVariable Long userId) throws Exception {
+        System.out.println("userId="+userId);
+        List<OrderItem> list = orderRepository.findByUserId(userId);
+        System.out.println("getOrderByUserId"+list.toString());
         return new ResponseEntity(orderRepository.findByUserId(userId), HttpStatus.OK);
     }
 

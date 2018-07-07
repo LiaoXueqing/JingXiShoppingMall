@@ -1,9 +1,11 @@
 package com.example.JingXiShoppingMall.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * 快递
@@ -18,7 +20,7 @@ public class LogisticsRecord {
     /**
      * 时间
      */
-    private String creatTime;
+    private String createTime;
     /**
      * 当前地址
      */
@@ -41,12 +43,12 @@ public class LogisticsRecord {
         this.orderId = orderId;
     }
 
-    public String getCreatTime() {
-        return creatTime;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatTime(String creatTime) {
-        this.creatTime = creatTime;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
     public String getAddress() {

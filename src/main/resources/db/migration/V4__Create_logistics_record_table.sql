@@ -1,4 +1,4 @@
-CREATE TABLE if not exists Logistics_Record (
+CREATE TABLE if not exists logistics_record (
   id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   order_id int(11),
   create_time varchar(128),
